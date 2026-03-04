@@ -1,124 +1,435 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>邓羽希 | 个人主页</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: #f0f7ff;
-      color: #2d3748;
-      line-height: 1.7;
-    }
-    .container {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-    .header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .avatar img {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #4299e1;
-      margin-bottom: 20px;
-    }
-    h1 {
-      font-size: 2.2rem;
-      color: #2b6cb0;
-      margin-bottom: 8px;
-    }
-    .title {
-      font-size: 1.1rem;
-      color: #4a5568;
-      margin-bottom: 12px;
-    }
-    .intro {
-      font-size: 1rem;
-      color: #718096;
-      max-width: 500px;
-      margin: 0 auto 30px;
-    }
-    .info {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .info a {
-      color: #3182ce;
-      text-decoration: none;
-      margin: 0 10px;
-    }
-    .info a:hover {
-      text-decoration: underline;
-    }
-    .section {
-      margin-bottom: 30px;
-    }
-    .section h2 {
-      font-size: 1.4rem;
-      color: #2c5282;
-      border-left: 4px solid #4299e1;
-      padding-left: 12px;
-      margin-bottom: 16px;
-    }
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-    }
-    .tag {
-      background: #e6f7ff;
-      color: #2b6cb0;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-    }
-    .quote {
-      text-align: center;
-      font-style: italic;
-      color: #4a5568;
-      font-size: 1.1rem;
-      margin-top: 40px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邓羽希 | 个人主页</title>
+    <style>
+        /* 全局样式重置与基础配置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth; /* 平滑滚动 */
+        }
+
+        :root {
+            --primary: #2b6cb0; /* 主蓝色（优雅不刺眼） */
+            --light-blue: #e6f7ff;
+            --gray-light: #f7fafc;
+            --gray: #718096;
+            --gray-dark: #2d3748;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: var(--gray-light);
+            color: var(--gray-dark);
+            line-height: 1.7;
+        }
+
+        /* 容器 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏 - 滚动动态效果 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255,255,255,0.95);
+            box-shadow: var(--shadow);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-scrolled {
+            background-color: rgba(255,255,255,0.85);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .nav-menu a {
+            color: var(--gray-dark);
+            text-decoration: none;
+            margin-left: 24px;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        /* 头部区域 */
+        .header {
+            padding: 120px 0 60px;
+            text-align: center;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .avatar {
+            margin-bottom: 24px;
+        }
+
+        .avatar img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .avatar img:hover {
+            transform: scale(1.05);
+        }
+
+        .name {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .identity {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 16px;
+        }
+
+        .intro {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1rem;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* 模块通用样式 */
+        .section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.8s ease forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.2s; }
+        .section:nth-child(2) { animation-delay: 0.4s; }
+        .section:nth-child(3) { animation-delay: 0.6s; }
+        .section:nth-child(4) { animation-delay: 0.8s; }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 24px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--light-blue);
+        }
+
+        /* 联系方式 */
+        .contact {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .contact-item:hover {
+            color: #1a4b80;
+            transform: translateY(-2px);
+        }
+
+        /* 技能模块 - 分类展示 */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            background-color: var(--light-blue);
+            padding: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(43, 108, 176, 0.15);
+        }
+
+        .skill-card-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background-color: white;
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* 项目模块 */
+        .project-item {
+            border-left: 3px solid var(--primary);
+            padding-left: 16px;
+            margin-bottom: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .project-item:hover {
+            border-left-color: #1a4b80;
+            padding-left: 20px;
+        }
+
+        .project-title {
+            font-weight: 600;
+            color: var(--gray-dark);
+            margin-bottom: 4px;
+        }
+
+        .project-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* 座右铭 */
+        .motto {
+            text-align: center;
+            font-style: italic;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin: 40px 0;
+            padding: 20px;
+            background-color: var(--light-blue);
+            border-radius: 8px;
+        }
+
+        /* 回到顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 动画 */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 600px) {
+            .name {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 24px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="avatar">
-        <img src="avatar.jpg" alt="邓羽希头像" />
-      </div>
-      <h1>邓羽希</h1>
-      <div class="title">北京大学 2024级 医学技术专业 本科</div>
-      <div class="intro">一枚INFP，比较内向，目前在探索流行病学以及医学人工智能。</div>
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-content">
+            <div class="nav-logo">邓羽希</div>
+            <div class="nav-menu">
+                <a href="#home">首页</a>
+                <a href="#skills">技能</a>
+                <a href="#projects">项目</a>
+                <a href="#motto">座右铭</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 头部 -->
+    <div class="header" id="home">
+        <div class="container">
+            <div class="avatar">
+                <img src="avatar.jpg" alt="邓羽希头像">
+            </div>
+            <h1 class="name">邓羽希</h1>
+            <div class="identity">北京大学 2024级 医学技术专业 本科</div>
+            <p class="intro">一枚INFP，比较内向，目前在探索流行病学以及医学人工智能的交叉领域，希望用技术赋能医学研究。</p>
+            <div class="contact">
+                <a href="mailto:dnegyuxi2006@163.com" class="contact-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    邮箱
+                </a>
+                <a href="https://github.com/dengyuxi2006" target="_blank" class="contact-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
     </div>
 
-    <div class="info">
-      <a href="mailto:dnegyuxi2006@163.com">邮箱</a>
-      <a href="https://github.com/dengyuxi2006" target="_blank">GitHub</a>
+    <!-- 主内容 -->
+    <div class="container">
+        <!-- 技能模块 -->
+        <section class="section" id="skills">
+            <h2 class="section-title">技能与爱好</h2>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <div class="skill-card-title">专业探索</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">流行病学</span>
+                        <span class="skill-tag">医学人工智能</span>
+                        <span class="skill-tag">数据分析</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-card-title">兴趣爱好</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">轮滑</span>
+                        <span class="skill-tag">乒乓球</span>
+                        <span class="skill-tag">阅读</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 项目模块 -->
+        <section class="section" id="projects">
+            <h2 class="section-title">项目与实践</h2>
+            <div class="project-item">
+                <div class="project-title">AI辅助医学数据整理工具（规划中）</div>
+                <div class="project-desc">基于Vibe Coding开发，用于流行病学数据的快速清洗与可视化</div>
+            </div>
+            <div class="project-item">
+                <div class="project-title">个人主页（已完成）</div>
+                <div class="project-desc">适配GitHub Pages部署，极简优雅的个人展示页面</div>
+            </div>
+        </section>
+
+        <!-- 座右铭 -->
+        <div class="motto" id="motto">
+            世上无难事，只怕有心人。
+        </div>
     </div>
 
-    <div class="section">
-      <h2>技能与爱好</h2>
-      <div class="tags">
-        <div class="tag">轮滑</div>
-        <div class="tag">乒乓球</div>
-        <div class="tag">人工智能</div>
-      </div>
+    <!-- 回到顶部按钮 -->
+    <div class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
     </div>
 
-    <div class="quote">世上无难事，只怕有心人。</div>
-  </div>
+    <!-- 交互脚本 -->
+    <script>
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', function() {
+            // 导航栏透明效果
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+
+            // 回到顶部按钮显示/隐藏
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+    </script>
 </body>
 </html>
